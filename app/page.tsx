@@ -3,8 +3,6 @@ import React, { useState, useRef } from 'react';
 import { TextField, Container, Typography } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 
-// hey hey
-
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,10 +15,12 @@ const LoginForm = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, RqUid:uuid() }),
         }).then((res) => {
-
             if (res.ok) {
                 res.json().then((data) => {
                     console.log(data);
+                }).then(() => {
+                    // @ts-ignore
+                    window.Telegram.WebApp.close()
                 })
                 // return res.json();
             }
